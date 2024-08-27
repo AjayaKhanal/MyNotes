@@ -1,0 +1,75 @@
+﻿@model Notes;
+@{
+    Layout = null;
+}
+
+<form asp-controller="Home" asp-action="AddNotes" method="post">
+
+    <div class="modal-header">
+        <div class="modal-title">Add Note</div>
+    </div>
+
+    <div class="modal-body">
+        <div>
+            <input asp-for="Title" class="form-control" placeholder="Enter your title" required />
+        </div>
+        <div>
+            <input asp-for="Description" class="form-control" placeholder="Enter your description.." required/>
+        </div>
+    </div>
+
+    <div class="modal-footer footer">
+        <button type="submit" class="button addnotes">Add</button>
+        <a asp-controller="Home" asp-action="Index" class="button back">Back</a>
+    </div>
+</form>
+
+<style>
+    input{
+        border-radius: 10px;
+    }
+
+    div {
+        margin-bottom: 10px;
+    }
+
+    .button {
+        text-decoration: none;
+        width: 50px;
+        display: inline-flex;
+        justify-content: center;
+        align-content: center;
+        border-radius: 5px;
+        border:none;
+        height: 30px;
+    }
+
+    .footer{
+        display: flex;
+        justify-content:space-between;
+    }
+
+    .back {
+        color: black;
+        background-color: rgba(255,255,255,0.9);
+        border: 0.1px solid black;
+    }
+
+        .back:hover {
+            color: black;
+            background-color: rgba(255,255,255,0.1);
+            transform:scale(1.05);
+        }
+
+    .addnotes {
+        background-color: rgba(0,0,255,0.7);
+        color: white;
+    }
+
+        .addnotes:hover {
+            background-color: rgba(0,0,255,0.9);
+            color: white;
+            transform: scale(1.05);
+        }
+
+</style>

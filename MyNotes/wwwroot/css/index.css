@@ -1,0 +1,132 @@
+﻿:root {
+    --gradient-color: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199, 100%, 33%));
+    --revert-gradient-color: linear-gradient(to right, hsl(199, 100%, 33%), hsl(187, 85%, 43%));
+    --gray-color: rgba(128, 128, 128, 0.5);
+    --light-gray-color: rgba(128, 128, 128, 0.1);
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    padding: 10px;
+}
+
+.first {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+    .first input {
+        width: 500px;
+        display: inline-block;
+        margin-right: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        /*border-color: rgba(0,0,0,0.3);*/
+        border: none;
+        border-bottom: revert;
+        outline-color: rgba(0,0,255,0.9);
+    }
+
+.search-button {
+    /*background-color: rgba(0,0,255,0.9);*/
+    background: var(--gradient-color);
+    color: white;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border:none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: medium;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+    .search-button:hover {
+        color: white;
+        background: var(--revert-gradient-color);
+        transform: scale(1.05);
+    }
+
+.note-container {
+    background: var(--light-gray-color);
+    padding: 15px;
+}
+
+.content {
+    background-color: var(--gray-color);
+    /*border: 1px solid rgba(0,0,0,0.5);*/
+    /*border-width: 3px;*/
+    padding: 15px;
+    margin-bottom: 10px;
+    
+}
+
+.notes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title {
+    cursor: pointer;
+}
+
+.action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+
+.edit {
+    display:inline-block;
+    color: forestgreen;
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+    .edit:hover{
+        text-decoration: underline;
+        color: forestgreen;
+        transform: scale(1.05);
+    }
+
+.delete {
+    color: darkred;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+.delete:hover {
+    text-decoration: underline;
+    color: darkred;
+    transform: scale(1.05);
+}
+
+.add-button {
+    position: fixed;
+    bottom: 100px;
+    right: 60px;
+    text-decoration: none;
+    background-color: rgba(0,255,0,1);
+    padding: 13px;
+    font-size: 20px;
+    border-radius: 30px;
+    color: white;
+}
+
+    .add-button:hover {
+        background-color: rgba(0,255,0,0.5);
+        color: white;
+    }

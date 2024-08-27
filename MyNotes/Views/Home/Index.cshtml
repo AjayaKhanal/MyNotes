@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Notes>
+
+<link rel="stylesheet" type="text/css" href="~/css/index.css" />
+
+<div class="container">
+    <div>
+        <div >
+            <form action="/Home/Index" method="get" class="first">
+                <input type="text" class="search-bar" name="searchkey" placeholder="Enter your text..." role="search" />
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="note-container">
+        @*Check if data present or not*@
+        @if (!Model.Any())
+        {
+            <p>No notes available</p>
+        }
+        else
+        {
+            @foreach (var note in Model)
+            {
+                <div class="content">
+                    <div class="notes">
+                        <div>
+                            <p id="noteId" style="display:none">@note.NoteId</p>
+                            <h1 class="title">@note.Title</h1>
+                            <div style="display:none" class="desc">
+                                <p>@note.Description</p>
+                            </div>
+                        </div>
+
+                        <div class="action">
+                            <div>
+                                <a role="button" class="edit" data-toogle="modal" >Edit</a>
+                            </div>
+                            <div>
+                                <a role="button" class="delete" data-toogle="modal">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+
+    <div>
+        <a role="button" class="add-button" data-toggle="modal">Add</a>
+    </div>
+
+    <div class="modal fade" id="addNotesModal" tabindex="-1" role="dialog"
+         aria-labelledby="addNotesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*Content loads here*@
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="editNotesModal" tabindex="-1" role="dialog"
+         aria-labelledby="editNotesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*Content loads here*@
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteNotesModal" tabindex="-1" role="dialog"
+         aria-labelledby="deleteNotesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*Content loads here*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.add-button').on('click', function () {
+            console.log("clicked");
+            // Load AddNotes.cshtml content into the modal
+            $('#addNotesModal .modal-content').load('Home/AddNotes', function () {
+                // Show the modal after content is loaded
+                $('#addNotesModal').modal('show');
+            })
+        })
+        
+        $('.edit').on('click', function () {
+            console.log("clicked");
+            
+            var noteId = document.getElementById('noteId').textContent;
+            console.log(noteId);
+
+            var editUrl = '/Home/EditNotes?noteId=' + noteId;
+
+            // Load EditNotes.cshtml content into the modal
+            $('#editNotesModal .modal-content').load(editUrl, function () {
+                // Show the modal after content is loaded
+                $('#editNotesModal').modal('show');
+            })
+        })
+        
+        $('.delete').on('click', function () {
+            console.log("clicked");
+            
+            var noteId = document.getElementById('noteId').textContent;
+            console.log(noteId);
+
+            var editUrl = '/Home/DeleteNote?noteId=' + noteId;
+
+            // Load EditNotes.cshtml content into the modal
+            $('#deleteNotesModal .modal-content').load(editUrl, function () {
+                // Show the modal after content is loaded
+                $('#deleteNotesModal').modal('show');
+            })
+        })
+    });
+</script>
+
+<script>
+    const titleElements = document.querySelectorAll(".title");
+    const descElements = document.querySelectorAll(".desc");
+
+    titleElements.forEach((title, index) => {
+        title.addEventListener("click", () => {
+            if (descElements[index].style.display === "none") {
+                descElements[index].style.display = "block";
+            } else {
+                descElements[index].style.display = "none";
+            }
+        });
+    });
+
+    // const searchButton = document.querySelector(".search-button");
+    // const noteContainers = document.querySelectorAll(".notes");
+
+    // searchButton.addEventListener("click", () => {
+    //     const searchTerm = document.querySelector(".search-bar").value.toLowerCase();
+    //     noteContainers.forEach((container) => {
+    //         const title = container.querySelector(".title");
+    //         const descElement = container.querySelector(".desc");
+    //         const noteTitle = title.textContent.toLowerCase();
+
+    //         if (noteTitle.includes(searchTerm)) {
+    //             container.style.display = "block";
+    //         } else {
+    //             container.hidden = "true";
+    //         }
+    //     });
+    // });
+</script>
